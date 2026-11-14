@@ -3,6 +3,9 @@
  */
 package com.mycompany.dublinschool;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author sissy
@@ -10,24 +13,27 @@ package com.mycompany.dublinschool;
 public class DublinSchool {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Dublin School");
+        System.out.println("WELCOME TO DUBLIN SCHOOL - Employee Management System");
 
-        Employee employee1 = new Employee(
-                "Kate",
-                "Summer",
-                "Female",
-                "ksummer@dublinschool.ie",
-                112000.00,
-                "Management",
-                "Principal",
-                "School Principal",
-                "Dublin School"
-        );
+        try {
+            ArrayList<Employee> employees
+                    = EmployeeFileReader.readEmployees("Applicants_Form.txt");
 
-        System.out.println("\nEmployee Information:");
-        System.out.println("Name: " + employee1.getFullName());
-        System.out.println("Position: " + employee1.getPosition());
-        System.out.println("Department: " + employee1.getDepartment());
+            System.out.println("\nFile read successfully!");
+            System.out.println("Total employees: " + employees.size());
 
+            System.out.println("\nFirst employee:");
+
+            for (int i = 0; i < 1 && i < employees.size(); i++) {
+
+                Employee employee = employees.get(i);
+
+                System.out.println("\nName: " + employee.getFullName());
+                System.out.println("Position: " + employee.getPosition());
+                System.out.println("Department: " + employee.getDepartment());
+            }
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
