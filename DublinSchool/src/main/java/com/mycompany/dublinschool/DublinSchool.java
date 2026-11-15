@@ -13,27 +13,18 @@ import java.util.ArrayList;
 public class DublinSchool {
 
     public static void main(String[] args) {
-        System.out.println("WELCOME TO DUBLIN SCHOOL - Employee Management System");
+        SchoolDisplay view = new SchoolDisplay();
+        view.showWelcome();
 
         try {
-            ArrayList<Employee> employees
-                    = EmployeeFileReader.readEmployees("Applicants_Form.txt");
+            ArrayList<Employee> employees =
+                    EmployeeFileReader.readEmployees("Applicants_Form.txt");
 
-            System.out.println("\nFile read successfully!");
-            System.out.println("Total employees: " + employees.size());
+            view.showFileLoaded(employees.size());
+            view.showFirstEmployee(employees);
 
-            System.out.println("\nFirst employee:");
-
-            for (int i = 0; i < 1 && i < employees.size(); i++) {
-
-                Employee employee = employees.get(i);
-
-                System.out.println("\nName: " + employee.getFullName());
-                System.out.println("Position: " + employee.getPosition());
-                System.out.println("Department: " + employee.getDepartment());
-            }
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
+            view.showError(e.getMessage());
         }
     }
 }
