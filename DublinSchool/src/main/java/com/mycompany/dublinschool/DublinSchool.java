@@ -20,9 +20,10 @@ public class DublinSchool {
             ArrayList<Employee> employees =
                     EmployeeFileReader.readEmployees("Applicants_Form.txt");
 
-            view.showFileLoaded(employees.size());
-            view.showFirstEmployee(employees);
-
+            view.showFileLoaded();
+            SchoolController controller = new SchoolController(view);
+            controller.start();
+            
         } catch (IOException e) {
             view.showError(e.getMessage());
         }

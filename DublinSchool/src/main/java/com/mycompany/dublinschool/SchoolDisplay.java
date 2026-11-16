@@ -4,8 +4,6 @@
  */
 package com.mycompany.dublinschool;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author sissy
@@ -18,22 +16,22 @@ public class SchoolDisplay {
     }
 
     // file read
-    public void showFileLoaded(int count) {
+    public void showFileLoaded() {
         System.out.println("\nFile read successfully!");
-        System.out.println("Total employees: " + count);
     }
 
-    // display employee
-    public void showFirstEmployee(ArrayList<Employee> employees) {
-        System.out.println("\nFirst employee:");
-        for (int i = 0; i < 1 && i < employees.size(); i++) {
-            
-            Employee employee = employees.get(i);
-
-            System.out.println("\nName: " + employee.getFullName());
-            System.out.println("Position: " + employee.getPosition());
-            System.out.println("Department: " + employee.getDepartment());
+    // main menu
+    public void showMenu() {
+        System.out.println("\n------- MENU -------");
+        for (Menu option : Menu.values()) {
+            System.out.println(option.getNumber() + ". "
+                    + option.getDescription());
         }
+        System.out.print("\nPlease select: ");
+    }
+
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 
     // error messages
