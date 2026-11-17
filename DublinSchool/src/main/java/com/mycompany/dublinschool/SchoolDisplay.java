@@ -4,6 +4,8 @@
  */
 package com.mycompany.dublinschool;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sissy
@@ -32,6 +34,15 @@ public class SchoolDisplay {
 
     public void showMessage(String message) {
         System.out.println(message);
+    }
+
+    // The first 20 sorted employees
+    public void showSortedEmployees(ArrayList<Employee> employees) {
+        System.out.println("\nFirst 20 employees in alphabetical order:");
+        for (int i = 0; i < 20 && i < employees.size(); i++) {
+            System.out.println((i + 1) + ". "
+                    + employees.get(i).getFullName());
+        }
     }
 
     // error messages

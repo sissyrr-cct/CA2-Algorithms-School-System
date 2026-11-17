@@ -5,6 +5,7 @@
 package com.mycompany.dublinschool;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,11 +14,25 @@ import java.util.Scanner;
 public class SchoolController {
 
     private SchoolDisplay view;
+    private ArrayList<Employee> employees;
 
-    public SchoolController(SchoolDisplay view) {
+    public SchoolController(SchoolDisplay view, ArrayList<Employee> employees) {
         this.view = view;
+        this.employees = employees;
     }
+    
+    private void sortEmployees() {
+        Employee[] arr = employees.toArray(new Employee[0]);
 
+        // recursive Merge Sort
+        MergeSort.mergeSort(arr, 0, arr.length - 1);
+
+        for (int i = 0; i < arr.length; i++) {
+            employees.set(i, arr[i]);
+        }
+        view.showSortedEmployees(employees);
+    }
+    
     public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -43,7 +58,7 @@ public class SchoolController {
 
             switch (option) {
                 case SORT:
-                    view.showMessage("Sort");
+                    sortEmployees();
                     break;
 
                 case SEARCH:

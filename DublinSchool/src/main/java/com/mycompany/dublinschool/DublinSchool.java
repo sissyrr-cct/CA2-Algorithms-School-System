@@ -21,7 +21,7 @@ public class DublinSchool {
                     EmployeeFileReader.readEmployees("Applicants_Form.txt");
 
             view.showFileLoaded();
-            SchoolController controller = new SchoolController(view);
+            SchoolController controller = new SchoolController(view, employees);
             controller.start();
             
         } catch (IOException e) {
