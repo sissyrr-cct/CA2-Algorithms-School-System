@@ -45,6 +45,19 @@ public class SchoolDisplay {
         }
     }
 
+    // Employee's full name prompt
+    public void showSearchPrompt() {
+        System.out.print("\nEnter employee full name: ");
+    }
+
+    // employee details
+    public void showEmployee(Employee employee) {
+        System.out.println("\nEmployee found");
+        System.out.println("Name: " + employee.getFullName());
+        System.out.println("Position: " + employee.getPosition());
+        System.out.println("Department: " + employee.getDepartment());
+    }
+
     // error messages
     public void showError(String message) {
         System.out.println("Error: " + message);

@@ -30,7 +30,23 @@ public class SchoolController {
         for (int i = 0; i < arr.length; i++) {
             employees.set(i, arr[i]);
         }
-        view.showSortedEmployees(employees);
+    }
+    
+     private void searchEmployee(Scanner scanner) {
+        view.showSearchPrompt();
+        String name = scanner.nextLine().trim();
+        if (name.isEmpty()) {
+            view.showError("Please enter a name");
+            return;
+        }
+        sortEmployees();
+        int index = BinarySearch.binarySearch(
+                employees, 0, employees.size() - 1, name);
+        if (index == -1) {
+            view.showMessage("Employee not found");
+        } else {
+            view.showEmployee(employees.get(index));
+        }
     }
     
     public void start() {
@@ -59,10 +75,11 @@ public class SchoolController {
             switch (option) {
                 case SORT:
                     sortEmployees();
+                    view.showSortedEmployees(employees);
                     break;
 
                 case SEARCH:
-                    view.showMessage("Search");
+                    searchEmployee(scanner);
                     break;
 
                 case ADD:
