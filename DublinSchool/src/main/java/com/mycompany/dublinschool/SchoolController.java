@@ -15,6 +15,7 @@ public class SchoolController {
 
     private SchoolDisplay view;
     private ArrayList<Employee> employees;
+    private ArrayList<Employee> newEmployees = new ArrayList<>();
 
     public SchoolController(SchoolDisplay view, ArrayList<Employee> employees) {
         this.view = view;
@@ -48,7 +49,80 @@ public class SchoolController {
             view.showEmployee(employees.get(index));
         }
     }
-    
+     
+      private void addEmployee(Scanner scanner) {
+        view.showAddPrompt();
+        String fullName = scanner.nextLine().trim();
+        while (!fullName.contains(" ") ||
+                fullName.split("\\s+").length < 2) {
+
+            view.showError("Please enter first and last name.");
+            view.showAddPrompt();
+            fullName = scanner.nextLine().trim();
+        }
+        
+        String[] nameParts = fullName.split("\\s+", 2);
+        String[] positions = {
+            "Principal",
+            "Deputy Principal",
+            "Teacher",
+            "Special Needs Assistant",
+            "Support Staff"
+        };
+
+        String[] departments = {
+            "Management",
+            "Teachers",
+            "Administration",
+            "Student Support",
+            "Support Services"
+        };
+
+        String position = chooseOption(scanner, "Position", positions);
+        String department = chooseOption(scanner, "Department", departments);
+
+        // Create new employee
+        Employee employee = new Employee(
+                nameParts[0],
+                nameParts[1],
+                "",
+                "",
+                0.0,
+                department,
+                position,
+                position,
+                "Dublin School"
+        );
+
+        employees.add(employee);
+        newEmployees.add(employee);
+
+        // keeping employee list sorted
+        sortEmployees();
+
+        view.showNewEmployees(newEmployees);
+    }
+      
+    private String chooseOption(Scanner scanner,
+            String title, String[] options) {
+        while (true) {
+            view.showChoices(title, options);
+            String input = scanner.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(input.trim());
+            } catch (NumberFormatException e) {
+                view.showError("Please enter a number");
+                continue;
+            }
+            if (choice >= 1 && choice <= options.length) {
+                return options[choice - 1];
+            }
+            view.showError("Please choose a valid option");
+        }
+    }
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -83,7 +157,7 @@ public class SchoolController {
                     break;
 
                 case ADD:
-                    view.showMessage("Add employee");
+                    addEmployee(scanner);
                     break;
 
                 case TREE:

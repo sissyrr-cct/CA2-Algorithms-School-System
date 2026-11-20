@@ -57,6 +57,29 @@ public class SchoolDisplay {
         System.out.println("Position: " + employee.getPosition());
         System.out.println("Department: " + employee.getDepartment());
     }
+    
+    // employee name prompt
+    public void showAddPrompt() {
+        System.out.print("\nEnter employee full name: ");
+    }
+
+    public void showChoices(String title, String[] options) {
+        System.out.println("\nChoose " + title + ":");
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
+        System.out.print("\nEnter your choice: ");
+    }
+
+    // Display all newly added employees
+    public void showNewEmployees(ArrayList<Employee> newEmployees) {
+        System.out.println("\nNew employees added:");
+        for (Employee employee : newEmployees) {
+            System.out.println("\nName: " + employee.getFullName());
+            System.out.println("Position: " + employee.getPosition());
+            System.out.println("Department: " + employee.getDepartment());
+        }
+    }
 
     // error messages
     public void showError(String message) {
