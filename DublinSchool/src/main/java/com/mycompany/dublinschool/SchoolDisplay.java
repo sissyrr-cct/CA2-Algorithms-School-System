@@ -57,7 +57,7 @@ public class SchoolDisplay {
         System.out.println("Position: " + employee.getPosition());
         System.out.println("Department: " + employee.getDepartment());
     }
-    
+
     // employee name prompt
     public void showAddPrompt() {
         System.out.print("\nEnter employee full name: ");
@@ -84,5 +84,24 @@ public class SchoolDisplay {
     // error messages
     public void showError(String message) {
         System.out.println("Error: " + message);
+    }
+
+    // Display the employee binary tree
+    public void showTree(ArrayList<ArrayList<Employee>> levels,
+            int total, int height) {
+        System.out.println("\nEMPLOYEE TREE");
+
+        for (int i = 0; i < levels.size(); i++) {
+
+            System.out.println("\nLevel " + (i + 1) + ":");
+            for (Employee employee : levels.get(i)) {
+                System.out.println(
+                        employee.getFullName() + " | "
+                        + employee.getPosition() + " | "
+                        + employee.getDepartment());
+            }
+        }
+        System.out.println("\nTotal nodes: " + total);
+        System.out.println("Tree height (levels): " + height);
     }
 }

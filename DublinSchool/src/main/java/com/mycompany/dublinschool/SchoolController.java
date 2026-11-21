@@ -21,7 +21,7 @@ public class SchoolController {
         this.view = view;
         this.employees = employees;
     }
-    
+
     private void sortEmployees() {
         Employee[] arr = employees.toArray(new Employee[0]);
 
@@ -32,8 +32,8 @@ public class SchoolController {
             employees.set(i, arr[i]);
         }
     }
-    
-     private void searchEmployee(Scanner scanner) {
+
+    private void searchEmployee(Scanner scanner) {
         view.showSearchPrompt();
         String name = scanner.nextLine().trim();
         if (name.isEmpty()) {
@@ -49,18 +49,18 @@ public class SchoolController {
             view.showEmployee(employees.get(index));
         }
     }
-     
-      private void addEmployee(Scanner scanner) {
+
+    private void addEmployee(Scanner scanner) {
         view.showAddPrompt();
         String fullName = scanner.nextLine().trim();
-        while (!fullName.contains(" ") ||
-                fullName.split("\\s+").length < 2) {
+        while (!fullName.contains(" ")
+                || fullName.split("\\s+").length < 2) {
 
             view.showError("Please enter first and last name.");
             view.showAddPrompt();
             fullName = scanner.nextLine().trim();
         }
-        
+
         String[] nameParts = fullName.split("\\s+", 2);
         String[] positions = {
             "Principal",
@@ -102,7 +102,7 @@ public class SchoolController {
 
         view.showNewEmployees(newEmployees);
     }
-      
+
     private String chooseOption(Scanner scanner,
             String title, String[] options) {
         while (true) {
@@ -123,6 +123,22 @@ public class SchoolController {
         }
     }
 
+    private void createTree() {
+        if (employees.size() < 20) {
+            view.showError("At least 20 employees required");
+            return;
+        }
+        BinaryTree tree = new BinaryTree();
+
+        for (Employee employee : employees) {
+            tree.insert(employee);
+        }
+
+        view.showTree(tree.getLevels(),
+                tree.getNodeCount(),
+                tree.getHeight());
+    }
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -135,14 +151,14 @@ public class SchoolController {
             try {
                 choice = Integer.parseInt(input.trim());
             } catch (NumberFormatException e) {
-                view.showError("Please enter a valid number.");
+                view.showError("Please enter a valid number");
                 continue;
             }
 
             Menu option = Menu.fromNumber(choice);
 
             if (option == null) {
-                view.showError("Please choose between 1 and 5.");
+                view.showError("Please choose between 1 and 5");
                 continue;
             }
 
@@ -161,7 +177,7 @@ public class SchoolController {
                     break;
 
                 case TREE:
-                    view.showMessage("Binary tree");
+                    createTree();
                     break;
 
                 case EXIT:
