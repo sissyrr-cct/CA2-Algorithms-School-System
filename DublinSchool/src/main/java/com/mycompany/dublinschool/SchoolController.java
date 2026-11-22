@@ -16,10 +16,12 @@ public class SchoolController {
     private SchoolDisplay view;
     private ArrayList<Employee> employees;
     private ArrayList<Employee> newEmployees = new ArrayList<>();
+    private ArrayList<Employee> originalOrder;
 
     public SchoolController(SchoolDisplay view, ArrayList<Employee> employees) {
         this.view = view;
         this.employees = employees;
+        this.originalOrder = new ArrayList<>(employees);
     }
 
     private void sortEmployees() {
@@ -95,6 +97,7 @@ public class SchoolController {
         );
 
         employees.add(employee);
+        originalOrder.add(employee);
         newEmployees.add(employee);
 
         // keeping employee list sorted
@@ -130,10 +133,10 @@ public class SchoolController {
         }
         BinaryTree tree = new BinaryTree();
 
-        for (Employee employee : employees) {
+        for (Employee employee : originalOrder) {
             tree.insert(employee);
         }
-
+        
         view.showTree(tree.getLevels(),
                 tree.getNodeCount(),
                 tree.getHeight());
