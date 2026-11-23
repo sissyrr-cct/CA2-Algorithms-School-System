@@ -54,7 +54,7 @@ public class SchoolDisplay {
     public void showEmployee(Employee employee) {
         System.out.println("\nEmployee found");
         System.out.println("Name: " + employee.getFullName());
-        System.out.println("Position: " + employee.getPosition());
+        System.out.println("Manager Type/Position: " + employee.getPosition());
         System.out.println("Department: " + employee.getDepartment());
     }
 
